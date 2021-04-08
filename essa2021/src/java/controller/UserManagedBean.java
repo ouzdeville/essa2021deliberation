@@ -8,6 +8,7 @@ package controller;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import model.User;
 
 /**
  *
@@ -22,53 +23,22 @@ public class UserManagedBean implements Serializable{
      */
     public UserManagedBean() {
     }
-    
-    private String login;
-    private String password;
-    private String nom;
-    private String prenom;
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
+    private User user=new User();
     public String connect(){
-        if("essa".equals(this.login) && "essa".equals(this.password)){
-            this.prenom="Drame";
+        if("essa".equals(this.user.getLogin()) && "essa".equals(this.user.getPassword())){
+            this.user.setPrenom("Drame");
             return "accueil";
         } else {
             return "";
         }
-       
+    }
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
     
     
 }

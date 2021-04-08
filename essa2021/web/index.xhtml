@@ -7,12 +7,18 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:outputLabel value="Login:"/>    
-            <h:inputText value="#{userManagedBean.login}" /><br />    
-            <h:outputLabel value="Mot de pass:"/>    
-            <h:inputSecret value="#{userManagedBean.password}"/><br />
-            <h:commandButton value="Cliquer" action="#{userManagedBean.connect()}" /><br />
-            
+            <h:panelGrid columns="2" >
+                <h:outputLabel value="Login:"/>    
+                <h:inputText value="#{userManagedBean.user.login}" />    
+                <h:outputLabel value="Mot de pass:"/>    
+                <h:inputSecret value="#{userManagedBean.user.password}"/>
+                <h:outputLabel value=""/> 
+                <h:commandButton value="Cliquer" action="#{userManagedBean.connect()}" />
+                <h:outputLabel value=""/> 
+                <h:commandLink value="Créer un compte"  />
+            </h:panelGrid>
+            Créer une page et une méthode pour ajouter les clients. 
+            et afficher tout dans la meme page 
         </h:form>
     </h:body>
 </html>
