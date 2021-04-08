@@ -6,7 +6,14 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h:form>
+            <h:outputLabel value="Login:"/>    
+            <h:inputText value="#{userManagedBean.login}" /><br />    
+            <h:outputLabel value="Mot de pass:"/>    
+            <h:inputText value="#{userManagedBean.password}"/><br />
+            <h:commandButton value="Cliquer" /><br />
+            
+        </h:form>
     </h:body>
 </html>
 
