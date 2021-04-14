@@ -16,8 +16,17 @@ public class User implements Serializable{
     private String password;
     private String nom;
     private String prenom;
+    private String email;
 
     public User() {
+    }
+
+    public User(String login, String password, String nom, String prenom, String email) {
+        this.login = login;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
     }
 
     public String getLogin() {
@@ -51,6 +60,27 @@ public class User implements Serializable{
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return this.prenom+" "+this.nom;
+    }
+
+    
+    public  User clone() {
+        return new User(login, password, nom, prenom, email);
+    }
+    
+    
+    
     
     
 }
