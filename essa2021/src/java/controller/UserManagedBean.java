@@ -46,8 +46,7 @@ public class UserManagedBean implements Serializable{
     public String addUser(){
         if(!this.user.getNom().equals("") && !this.user.getPrenom().equals("")){
             userList.add(0, user.clone());
-             this.user.setNom("");
-            this.user.setPrenom("");
+             user=new User();
             System.out.println(userList);
             return "";
         }
