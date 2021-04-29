@@ -11,7 +11,7 @@
     <h:body>
         <ui:composition template="template/template.xhtml"> 
 
-            <ui:define name="ouest"> 
+            <ui:define name="menu_droite"> 
                 <h:form>
                     <h:panelGrid columns="2" >
                         <h:outputLabel value="Nom:"/>    
@@ -34,7 +34,7 @@
 
             </ui:define>
 
-            <ui:define name="centre">
+            <ui:define name="body">
 
                 <p:dataTable value="#{userManagedBean.userList}" var="user"
                              paginator="true" rowsPerPageTemplate="2,10">
