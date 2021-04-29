@@ -8,9 +8,13 @@ package controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import model.User;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import model.Users;
 
 /**
  *
@@ -25,11 +29,18 @@ public class UserManagedBean implements Serializable{
      */
     public UserManagedBean() {
     }
-    private User user=new User();
-    private List<User>  userList=new ArrayList<>();
+    private Users user=new Users();
+    private List<Users>  userList=new ArrayList<>();
+    private EntityManager em;
+    
+    @PostConstruct
+    public void init(){
+        EntityManagerFactory emf=Persistence.createEntityManagerFactory("essa2021PU");
+        em=emf.createEntityManager();
+    }
     
     public String connect(){
-        if("essa".equals(this.user.getLogin()) && "essa".equals(this.user.getPassword())){
+        if("essa".equals(this.user.getLogin()) && "essa".equals(this.user.getPass())){
             this.user.setPrenom("Drame");
             return "accueil";
         } else {
@@ -45,26 +56,26 @@ public class UserManagedBean implements Serializable{
      */
     public String addUser(){
         if(!this.user.getNom().equals("") && !this.user.getPrenom().equals("")){
-            userList.add(0, user.clone());
-             user=new User();
-            System.out.println(userList);
+            em.getTransaction().begin();
+            em.persist(user);
+            em.getTransaction().commit();
             return "";
         }
         return "";
     }
     
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
-    public void setUser(User user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 
-    public List<User> getUserList() {
+    public List<Users> getUserList() {
         return userList;
     }
 
-    public void setUserList(List<User> userList) {
+    public void setUserList(List<Users> userList) {
         this.userList = userList;
     }
 
