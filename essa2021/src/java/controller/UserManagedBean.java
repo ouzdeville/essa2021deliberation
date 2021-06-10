@@ -14,7 +14,8 @@ import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import model.Users;
+import model.Profil;
+import model.User;
 
 /**
  *
@@ -29,8 +30,8 @@ public class UserManagedBean implements Serializable{
      */
     public UserManagedBean() {
     }
-    private Users user=new Users();
-    private List<Users>  userList=new ArrayList<>();
+    private User user=new User();
+    private List<User>  userList=new ArrayList<>();
     private EntityManager em;
     
     @PostConstruct
@@ -40,7 +41,7 @@ public class UserManagedBean implements Serializable{
     }
     
     public String connect(){
-        if("essa".equals(this.user.getLogin()) && "essa".equals(this.user.getPass())){
+        if("essa".equals(this.user.getEmail()) && "essa".equals(this.user.getPassword())){
             this.user.setPrenom("Drame");
             return "accueil";
         } else {
@@ -57,6 +58,7 @@ public class UserManagedBean implements Serializable{
     public String addUser(){
         if(!this.user.getNom().equals("") && !this.user.getPrenom().equals("")){
             em.getTransaction().begin();
+            user.setIdProfil(new Profil(1));
             em.persist(user);
             em.getTransaction().commit();
             return "";
@@ -64,18 +66,18 @@ public class UserManagedBean implements Serializable{
         return "";
     }
     
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public List<Users> getUserList() {
+    public List<User> getUserList() {
         return userList;
     }
 
-    public void setUserList(List<Users> userList) {
+    public void setUserList(List<User> userList) {
         this.userList = userList;
     }
 
