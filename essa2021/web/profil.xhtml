@@ -2,12 +2,70 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <ui:composition template="template/template.xhtml"> 
+            <ui:define name="body">
+                <h:form>
+                    <p:dataTable id="profils" value="#{profilManagedBean.profilList}" var="profil"
+                                 paginator="true" rowsPerPageTemplate="2,10"
+                                 rowKey="#{profil.nom}"
+                                 selection="#{profilManagedBean.profil}" selectionMode="single">
+
+                        <p:column headerText="NOM:" sortBy="#{profil.nom}" filterBy="#{profil.nom}">
+                            <p:outputLabel value="#{profil.nom}" />
+                        </p:column>
+
+
+                    </p:dataTable>
+
+
+                    <p:commandButton value="Create" onclick="PF('dlgCreate').show();" />
+                    <p:contextMenu for="profils">
+                        <p:menuitem value="Create"  icon="pi pi-search"
+                                    oncomplete="PF('dlgCreate').show()"/>
+                        <p:menuitem value="Modify" update="idModifyDialog" icon="pi pi-search"
+                                    oncomplete="PF('dlgModify').show()"/>
+                        <p:menuitem value="Delete" update="profils" icon="pi pi-times"
+                                    action="#{profilManagedBean.delete()}"/>
+                    </p:contextMenu>
+
+
+
+
+                    <p:dialog id="idCreateDialog" widgetVar="dlgCreate"   closable="true">
+                        
+                            <h:panelGrid columns="2" >
+                                <h:outputLabel value="Nom:"/>    
+                                <h:inputText value="#{profilManagedBean.profil.nom}" />    
+                                <h:outputLabel value=""/> 
+                                <h:commandButton value="Cliquer" action="#{profilManagedBean.create()}" />
+                                <h:outputLabel value=""/> 
+
+                            </h:panelGrid>
+
+                        
+                    </p:dialog>
+
+                    <p:dialog id="idModifyDialog" widgetVar="dlgModify"   closable="true">
+                    
+                            <h:panelGrid columns="2" >
+                                <h:outputLabel value="Nom:"/>    
+                                <h:inputText value="#{profilManagedBean.profil.nom}" />    
+                                <h:outputLabel value=""/> 
+                                <h:commandButton value="Cliquer" action="#{profilManagedBean.modify()}" />
+                                <h:outputLabel value=""/> 
+
+                            </h:panelGrid>
+
+                       
+                    </p:dialog>
+                </h:form>
+            </ui:define>
         </ui:composition>
     </h:body>
 </html>
